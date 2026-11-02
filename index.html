@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1016">
+  <meta name="description" content="Reach one quintillion, one laser at a time. A desktop counter game with exact scores, quick adjustments, and negative numbers.">
+  <title>Laser Score Rush · Road to a Quintillion</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230c1016'/%3E%3Cpath d='M15 47 49 17' stroke='%23b6f36a' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='49' cy='17' r='7' fill='%23b6f36a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="laser-layer" id="laserLayer" aria-hidden="true"></div>
+  <main class="page">
+    <header class="page-header">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">↗</span><div><p class="eyebrow">LASER SCORE RUSH</p><h1>Road to a quintillion<span>.</span></h1></div></div>
+      <div class="save-state"><span></span> Saved on this device</div>
+    </header>
+    <section class="game" aria-label="Laser counter game">
+      <div class="game-header"><div class="target"><span class="label">FINISH LINE</span><strong>1,000,000,000,000,000,000</strong></div><span class="game-status" id="statusMessage" role="status">Ready to fire</span></div>
+      <div class="arena">
+        <div class="score-area" id="scoreArea">
+          <div class="score-top"><span class="label">YOUR SCORE</span><span class="shots" id="shotsLabel">0 shots fired</span></div>
+          <div class="gun" id="gun" aria-hidden="true">
+            <svg viewBox="0 0 186 132" role="presentation">
+              <defs><linearGradient id="gunGreen" x2="1" y2="1"><stop stop-color="#d8ffa3"/><stop offset="1" stop-color="#79b938"/></linearGradient><linearGradient id="gunMetal" x2="1" y2="1"><stop stop-color="#e5e9e8"/><stop offset="1" stop-color="#677578"/></linearGradient></defs>
+              <path d="M25 17Q19 15 15 22L8 72Q7 79 14 82L45 90Q51 91 54 84L66 40Q67 34 61 31Z" fill="url(#gunGreen)" stroke="#e2ffba" stroke-width="2"/>
+              <path d="M12 77 48 87 44 111Q42 119 34 116L14 109Q8 107 9 101Z" fill="#222d31" stroke="#526064" stroke-width="2"/>
+              <path d="M62 37 92 51 88 80 53 67Z" fill="#465757" stroke="#85938b" stroke-width="2"/>
+              <path d="M90 49 125 62 113 87 86 77Z" fill="url(#gunMetal)" stroke="#bfcac7" stroke-width="2"/>
+              <path d="M119 68 143 76 141 96 116 88Z" fill="#9baa9f" stroke="#d2e3ce" stroke-width="2"/>
+              <path d="M141 78 172 96 166 104 139 94Z" fill="#c0d7b4" stroke="#ebf9e1" stroke-width="2"/>
+              <circle id="gunMuzzle" cx="169" cy="100" r="2" fill="#ebffda"/>
+              <path d="M23 28 46 35" stroke="#efffd5" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="score-wrap" id="scoreWrap"><output id="score" class="score" aria-label="Current score">0</output></div>
+          <div class="score-bottom"><div class="remaining"><span class="label" id="remainingLabel">TO THE FINISH</span><strong id="remaining">1,000,000,000,000,000,000</strong></div><span class="stretch-caption" id="progressCaption">Every shot counts</span></div>
+          <div class="progress-track" aria-hidden="true"><div id="progressFill"></div></div>
+        </div>
+        <div class="primary-controls" aria-label="Score controls">
+          <button class="fire-button plus" id="plusButton" type="button" aria-label="Add 1 and fire a green laser"><span class="button-symbol">+</span><span class="button-text">Add one</span><kbd>+</kbd></button>
+          <button class="fire-button minus" id="minusButton" type="button" aria-label="Subtract 1 and fire a red laser"><span class="button-symbol">−</span><span class="button-text">Subtract one</span><kbd>−</kbd></button>
+        </div>
+      </div>
+      <div class="quick-row"><span class="label">QUICK ADJUSTMENTS</span><div class="shortcut-group" aria-label="Quick score adjustments"><button class="shortcut positive" type="button" data-change="30">+30</button><button class="shortcut negative" type="button" data-change="-222">−222</button><button class="shortcut negative" type="button" data-change="-700">−700</button><button class="shortcut negative" type="button" data-change="-50000">−50,000</button></div></div>
+      <div class="utility-row">
+        <button id="jumpButton" class="utility-button help-button" type="button"><span class="utility-icon" aria-hidden="true">↗</span><span><strong>Help me</strong><small>Jump to 300 from the finish</small></span><span class="utility-arrow" aria-hidden="true">→</span></button>
+        <button id="bigSubtractButton" class="utility-button big-subtract" data-change="-999999999999999999" type="button" aria-label="Subtract 999,999,999,999,999,999. Negative scores allowed."><span class="utility-icon" aria-hidden="true">−</span><span><strong>Subtract 999,999,999,999,999,999</strong><small>Can take your score below zero</small></span></button>
+        <button id="resetButton" class="utility-button reset-button" type="button"><span class="utility-icon" aria-hidden="true">↺</span><span><strong>Reset</strong><small>Back to exactly zero</small></span></button>
+      </div>
+    </section>
+    <footer class="page-footer"><span>One click. One laser. One step closer.</span><span>Keyboard controls <kbd>+</kbd> <kbd>−</kbd><span class="footer-divider"></span>Negative scores welcome.</span></footer>
+  </main>
+  <div class="victory" id="victory" aria-hidden="true"><div class="victory-inner" role="dialog" aria-modal="true" aria-labelledby="victoryTitle"><span class="victory-icon" aria-hidden="true">✦</span><p class="eyebrow">FINISH LINE REACHED</p><h2 id="victoryTitle">One quintillion.</h2><p>You made every shot count.</p><button type="button" id="keepPlaying">Keep playing <span aria-hidden="true">→</span></button></div></div>
+</body>
+</html>
