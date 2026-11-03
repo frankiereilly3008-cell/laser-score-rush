@@ -18,7 +18,6 @@ const formatter = new Intl.NumberFormat('en-US');
 
 let score = START;
 let shots = 0;
-let hitTimer;
 let gunTimer;
 let victoryShown = false;
 let victoryTimer;
@@ -67,7 +66,8 @@ function fireLaser(isPositive) {
   const x1 = from.left + from.width / 2;
   const y1 = from.top + from.height / 2;
   const x2 = to.left + to.width / 2;
-  const y2 = to.top + to.height / 2;
+  // Keep the beam and impact clear of the digits so the score stays readable.
+  const y2 = to.top - 32;
   const angle = Math.atan2(y2 - y1, x2 - x1);
   const length = Math.hypot(x2 - x1, y2 - y1);
   const color = isPositive ? '#b6f36a' : '#ff7188';
@@ -89,11 +89,6 @@ function fireLaser(isPositive) {
   clearTimeout(gunTimer);
   gunTimer = setTimeout(() => gun.classList.remove('kick'), 270);
 
-  scoreEl.classList.remove('hit-green', 'hit-red');
-  void scoreEl.offsetWidth;
-  scoreEl.classList.add(isPositive ? 'hit-green' : 'hit-red');
-  clearTimeout(hitTimer);
-  hitTimer = setTimeout(() => scoreEl.classList.remove('hit-green', 'hit-red'), 260);
 }
 
 function changeScore(amount) {
